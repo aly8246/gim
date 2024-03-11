@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/protobufjs@7.0.0/dist/protobuf.min.js"></script>
+<script lang="js">
+    var socket = new WebSocket("ws://180.76.164.117:8002/ws");
+
+    socket.onopen = function(event) {
+        socket.send("Hello server!");
+    };
+
+    socket.onmessage = function(event) {
+        console.log("Received message from server: " + event.data);
+    };
+
+    socket.onerror = function(event) {
+        console.log("WebSocket error: " + event.error);
+    };
+
+    socket.onclose = function(event) {
+        console.log("WebSocket connection closed with code " + event.code);
+    }
+
+</script>
+</body>
+</html>

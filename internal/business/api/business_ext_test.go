@@ -24,7 +24,7 @@ func getBusinessExtClient() pb.BusinessExtClient {
 func getCtx() context.Context {
 	token := "0"
 	return metadata.NewOutgoingContext(context.TODO(), metadata.Pairs(
-		"user_id", "3",
+		"user_id", "1",
 		"device_id", "1",
 		"token", token,
 		"request_id", strconv.FormatInt(time.Now().UnixNano(), 10)))
@@ -32,9 +32,9 @@ func getCtx() context.Context {
 
 func TestUserExtServer_SignIn(t *testing.T) {
 	resp, err := getBusinessExtClient().SignIn(getCtx(), &pb.SignInReq{
-		PhoneNumber: "22222222222",
+		PhoneNumber: "15730809230",
 		Code:        "0",
-		DeviceId:    3,
+		DeviceId:    2,
 	})
 	if err != nil {
 		fmt.Println(err)
@@ -43,7 +43,7 @@ func TestUserExtServer_SignIn(t *testing.T) {
 }
 
 func TestUserExtServer_GetUser(t *testing.T) {
-	resp, err := getBusinessExtClient().GetUser(getCtx(), &pb.GetUserReq{UserId: 1})
+	resp, err := getBusinessExtClient().GetUser(getCtx(), &pb.GetUserReq{UserId: 2})
 	if err != nil {
 		fmt.Println(err)
 	}

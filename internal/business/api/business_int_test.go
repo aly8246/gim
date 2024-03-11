@@ -9,7 +9,7 @@ import (
 )
 
 func getBusinessIntClient() pb.BusinessIntClient {
-	conn, err := grpc.Dial("localhost:50300", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:8020", grpc.WithInsecure())
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -18,12 +18,13 @@ func getBusinessIntClient() pb.BusinessIntClient {
 }
 
 func TestUserIntServer_Auth(t *testing.T) {
-	_, err := getBusinessIntClient().Auth(getCtx(), &pb.AuthReq{
-		UserId:   3,
+	res, err := getBusinessIntClient().Auth(getCtx(), &pb.AuthReq{
+		UserId:   1,
 		DeviceId: 1,
 		Token:    "0",
 	})
 	fmt.Println(err)
+	fmt.Println(res)
 }
 
 func TestUserIntServer_GetUsers(t *testing.T) {

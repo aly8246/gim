@@ -26,8 +26,8 @@ func getLogicExtClient() pb.LogicExtClient {
 func getCtx() context.Context {
 	token := "0"
 	return metadata.NewOutgoingContext(context.TODO(), metadata.Pairs(
-		"user_id", "3",
-		"device_id", "3",
+		"user_id", "1",
+		"device_id", "1",
 		"token", token,
 		"request_id", strconv.FormatInt(time.Now().UnixNano(), 10)))
 }
@@ -35,9 +35,9 @@ func getCtx() context.Context {
 func TestLogicExtServer_RegisterDevice(t *testing.T) {
 	resp, err := getLogicExtClient().RegisterDevice(context.TODO(),
 		&pb.RegisterDeviceReq{
-			Type:          1,
-			Brand:         "huawei",
-			Model:         "huawei P30",
+			Type:          5,
+			Brand:         "web browser",
+			Model:         "web browser",
 			SystemVersion: "1.0.0",
 			SdkVersion:    "1.0.0",
 		})
@@ -52,7 +52,7 @@ func TestLogicExtServer_SendMessageToFriend(t *testing.T) {
 	resp, err := getLogicExtClient().SendMessageToFriend(getCtx(),
 		&pb.SendMessageReq{
 			ReceiverId: 2,
-			Content:    []byte("hahaha1000"),
+			Content:    []byte("你好啊"),
 			SendTime:   util.UnixMilliTime(time.Now()),
 		})
 	if err != nil {

@@ -131,7 +131,7 @@ func (c *WSClient) HandlePackage(bytes []byte) {
 		fmt.Println("离线消息同步响应:code", output.Code, "message:", output.Message)
 		fmt.Printf("%+v \n", &output)
 		for _, msg := range syncResp.Messages {
-			log.Println(util.MessageToString(msg))
+			log.Panicln(util.MessageToString(msg))
 			c.Seq = msg.Seq
 		}
 

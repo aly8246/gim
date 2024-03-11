@@ -12,7 +12,7 @@ import (
 )
 
 func getLogicIntClient() pb.LogicIntClient {
-	conn, err := grpc.Dial("111.229.238.28:50000", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:8010", grpc.WithInsecure())
 	if err != nil {
 		logger.Sugar.Error(err)
 		return nil
@@ -21,14 +21,14 @@ func getLogicIntClient() pb.LogicIntClient {
 }
 
 func TestLogicIntServer_SignIn(t *testing.T) {
-	token := ""
+	token := "0"
 
 	resp, err := getLogicIntClient().ConnSignIn(context.TODO(),
 		&pb.ConnSignInReq{
-			DeviceId: 1,
-			UserId:   1,
+			DeviceId: 2,
+			UserId:   2,
 			Token:    token,
-			ConnAddr: "127.0.0.1:5000",
+			ConnAddr: "127.0.0.1:8010",
 		})
 	if err != nil {
 		logger.Sugar.Error(err)
