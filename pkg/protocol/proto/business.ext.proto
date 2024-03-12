@@ -2,7 +2,7 @@ syntax = "proto3";
 package pb;
 option go_package = "gim/pkg/protocol/pb";
 
-import "google/protobuf/empty.proto";
+import "empty.proto";
 
 service BusinessExt {
   // 登录

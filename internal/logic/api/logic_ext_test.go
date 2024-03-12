@@ -15,7 +15,7 @@ import (
 )
 
 func getLogicExtClient() pb.LogicExtClient {
-	conn, err := grpc.Dial("127.0.0.1:8010", grpc.WithInsecure())
+	conn, err := grpc.Dial("180.76.164.117:8010", grpc.WithInsecure())
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -52,7 +52,7 @@ func TestLogicExtServer_SendMessageToFriend(t *testing.T) {
 	resp, err := getLogicExtClient().SendMessageToFriend(getCtx(),
 		&pb.SendMessageReq{
 			ReceiverId: 2,
-			Content:    []byte("你好啊"),
+			Content:    []byte("网页接收消息"),
 			SendTime:   util.UnixMilliTime(time.Now()),
 		})
 	if err != nil {

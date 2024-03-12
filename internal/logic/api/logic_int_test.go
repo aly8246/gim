@@ -12,7 +12,7 @@ import (
 )
 
 func getLogicIntClient() pb.LogicIntClient {
-	conn, err := grpc.Dial("localhost:8010", grpc.WithInsecure())
+	conn, err := grpc.Dial("180.76.164.117:8010", grpc.WithInsecure())
 	if err != nil {
 		logger.Sugar.Error(err)
 		return nil
