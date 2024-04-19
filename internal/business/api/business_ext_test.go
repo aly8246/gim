@@ -32,9 +32,9 @@ func getCtx() context.Context {
 
 func TestUserExtServer_SignIn(t *testing.T) {
 	resp, err := getBusinessExtClient().SignIn(getCtx(), &pb.SignInReq{
-		PhoneNumber: "15730809230",
+		PhoneNumber: "15086806334",
 		Code:        "0",
-		DeviceId:    2,
+		DeviceId:    1,
 	})
 	if err != nil {
 		fmt.Println(err)

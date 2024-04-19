@@ -74,6 +74,9 @@ func (*messageService) SendToUser(ctx context.Context, fromDeviceID, toUserID in
 		err error
 	)
 
+	var msg pb.UserMessagePush
+	err = proto.Unmarshal(message.Content, &msg)
+
 	if isPersist {
 		seq, err = SeqService.GetUserNext(ctx, toUserID)
 		if err != nil {
@@ -82,13 +85,15 @@ func (*messageService) SendToUser(ctx context.Context, fromDeviceID, toUserID in
 		message.Seq = seq
 
 		selfMessage := model.Message{
-			UserId:    toUserID,
-			RequestId: grpclib.GetCtxRequestId(ctx),
-			Code:      message.Code,
-			Content:   message.Content,
-			Seq:       seq,
-			SendTime:  util.UnunixMilliTime(message.SendTime),
-			Status:    int32(pb.MessageStatus_MS_NORMAL),
+			UserId:     toUserID,
+			SenderId:   msg.Sender.UserId,
+			ReceiverId: msg.ReceiverId,
+			RequestId:  grpclib.GetCtxRequestId(ctx),
+			Code:       message.Code,
+			Content:    message.Content,
+			Seq:        seq,
+			SendTime:   util.UnunixMilliTime(message.SendTime),
+			Status:     int32(pb.MessageStatus_MS_NORMAL),
 		}
 		err = repo.MessageRepo.Save(selfMessage)
 		if err != nil {

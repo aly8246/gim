@@ -19,8 +19,8 @@ func getBusinessIntClient() pb.BusinessIntClient {
 
 func TestUserIntServer_Auth(t *testing.T) {
 	res, err := getBusinessIntClient().Auth(getCtx(), &pb.AuthReq{
-		UserId:   1,
-		DeviceId: 1,
+		UserId:   1069,
+		DeviceId: 2,
 		Token:    "0",
 	})
 	fmt.Println(err)

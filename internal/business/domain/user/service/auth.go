@@ -7,6 +7,7 @@ import (
 	"gim/pkg/gerrors"
 	"gim/pkg/protocol/pb"
 	"gim/pkg/rpc"
+	"gim/pkg/util"
 	"time"
 )
 
@@ -45,8 +46,8 @@ func (*authService) SignIn(ctx context.Context, phoneNumber, code string, device
 	}
 
 	// 方便测试
-	token := "0"
-	//token := util.RandString(40)
+	//token := "0"
+	token := util.RandString(40)
 	err = repo.AuthRepo.Set(user.Id, resp.Device.DeviceId, model.Device{
 		Type:   resp.Device.Type,
 		Token:  token,

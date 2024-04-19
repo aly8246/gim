@@ -29,7 +29,7 @@ type WSClient struct {
 }
 
 func (c *WSClient) Start() {
-	conn, resp, err := websocket.DefaultDialer.Dial("ws://180.76.164.117:8002/ws", http.Header{})
+	conn, resp, err := websocket.DefaultDialer.Dial("wss://yancha.online/ws", http.Header{})
 	if err != nil {
 		fmt.Println("dial error", err)
 		return
@@ -80,7 +80,7 @@ func (c *WSClient) SignIn() {
 	signIn := pb.SignInInput{
 		UserId:   c.UserId,
 		DeviceId: c.DeviceId,
-		Token:    "0",
+		Token:    "QrLMTvqjzcDH7N-ZDZFDY9K-8p1LjlYPYSIlwZ9BCmw=",
 	}
 	c.Output(pb.PackageType_PT_SIGN_IN, time.Now().UnixNano(), &signIn)
 }

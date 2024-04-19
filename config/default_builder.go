@@ -26,7 +26,7 @@ func (*defaultBuilder) Build() Configuration {
 		PushRoomSubscribeNum: 100,
 		PushAllSubscribeNum:  100,
 
-		ConnectLocalAddr:     "180.76.164.117:8000",
+		ConnectLocalAddr:     "localhost:8000",
 		ConnectRPCListenAddr: ":8000",
 		ConnectTCPListenAddr: ":8001",
 		ConnectWSListenAddr:  ":8002",
@@ -36,7 +36,7 @@ func (*defaultBuilder) Build() Configuration {
 		FileHTTPListenAddr:    "8030",
 
 		ConnectIntClientBuilder: func() pb.ConnectIntClient {
-			conn, err := grpc.DialContext(context.TODO(), "addrs:///180.76.164.117:8000", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
+			conn, err := grpc.DialContext(context.TODO(), "addrs:///localhost:8000", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
 				grpc.WithDefaultServiceConfig(fmt.Sprintf(`{"LoadBalancingPolicy": "%s"}`, picker.AddrPickerName)))
 			if err != nil {
 				panic(err)
@@ -44,7 +44,7 @@ func (*defaultBuilder) Build() Configuration {
 			return pb.NewConnectIntClient(conn)
 		},
 		LogicIntClientBuilder: func() pb.LogicIntClient {
-			conn, err := grpc.DialContext(context.TODO(), "addrs:///180.76.164.117:8010", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
+			conn, err := grpc.DialContext(context.TODO(), "addrs:///localhost:8010", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
 				grpc.WithDefaultServiceConfig(fmt.Sprintf(`{"LoadBalancingPolicy": "%s"}`, roundrobin.Name)))
 			if err != nil {
 				panic(err)
@@ -52,7 +52,7 @@ func (*defaultBuilder) Build() Configuration {
 			return pb.NewLogicIntClient(conn)
 		},
 		BusinessIntClientBuilder: func() pb.BusinessIntClient {
-			conn, err := grpc.DialContext(context.TODO(), "addrs:///180.76.164.117:8020", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
+			conn, err := grpc.DialContext(context.TODO(), "addrs:///localhost:8010", grpc.WithInsecure(), grpc.WithUnaryInterceptor(interceptor),
 				grpc.WithDefaultServiceConfig(fmt.Sprintf(`{"LoadBalancingPolicy": "%s"}`, roundrobin.Name)))
 			if err != nil {
 				panic(err)

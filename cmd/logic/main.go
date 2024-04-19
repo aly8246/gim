@@ -2,7 +2,8 @@ package main
 
 import (
 	"gim/config"
-	"gim/internal/logic/api"
+	bapi "gim/internal/business/api"
+	lapi "gim/internal/logic/api"
 	"gim/internal/logic/domain/device"
 	"gim/internal/logic/domain/message"
 	"gim/internal/logic/proxy"
@@ -36,8 +37,10 @@ func main() {
 		server.GracefulStop()
 	}()
 
-	pb.RegisterLogicIntServer(server, &api.LogicIntServer{})
-	pb.RegisterLogicExtServer(server, &api.LogicExtServer{})
+	pb.RegisterLogicIntServer(server, &lapi.LogicIntServer{})
+	pb.RegisterLogicExtServer(server, &lapi.LogicExtServer{})
+	pb.RegisterBusinessExtServer(server, &bapi.BusinessExtServer{})
+	pb.RegisterBusinessIntServer(server, &bapi.BusinessIntServer{})
 	listen, err := net.Listen("tcp", config.Config.LogicRPCListenAddr)
 	if err != nil {
 		panic(err)
